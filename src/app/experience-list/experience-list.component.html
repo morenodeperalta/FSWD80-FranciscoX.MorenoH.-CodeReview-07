@@ -1,0 +1,18 @@
+<form class="form-inline">
+        <input name="searchInput" class="form-control" placeholder="Search" #searchInput="ngModel" [(ngModel)]="searchText" style="width: 80%;">
+        <button class="btn btn-outline-primary" (click)="searchText=''">x</button>
+</form>
+
+<ng-container *ngFor="let experience of experienceArray">
+  <div class="card" style="width: 18rem;" *ngIf="filterCondition(experience)">
+  <img src="{{experience.img}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{experience.experience}}</h5>
+    <p class="card-text">Days: {{experience.days}}</p>
+    <p class="card-text">Min. People: {{experience.people}}</p>
+    <button class="btn btn-info" (click)="experienceService.populateForm(experience)">Edit</button>
+    <button class="btn btn-danger" (click)="onDelete(experience.$key)">Delete</button>
+  </div>
+</div>
+</ng-container>
+<div class="alert alert-danger" *ngIf="showDeletedMessage">Deleted successfully</div>
